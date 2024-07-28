@@ -5,6 +5,10 @@ import { BucketModule } from "./bucket/bucket.module";
 import { RewardModule } from "./reward/reward.module";
 import { ScoreModule } from "./score/score.module";
 import { UserModule } from "./user/user.module";
+import { EventModuleModule } from "./eventmodule/eventmodule.module";
+import { LeaderboardModuleModule } from "./leaderboardmodule/leaderboardmodule.module";
+import { RewardModuleModule } from "./rewardmodule/rewardmodule.module";
+import { ScoreModuleModule } from "./scoremodule/scoremodule.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -28,6 +32,10 @@ import { AuthModule } from "./auth/auth.module";
     RewardModule,
     ScoreModule,
     UserModule,
+    EventModuleModule,
+    LeaderboardModuleModule,
+    RewardModuleModule,
+    ScoreModuleModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,
