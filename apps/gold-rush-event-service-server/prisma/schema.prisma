@@ -1,0 +1,76 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Event {
+  buckets   Bucket[]
+  createdAt DateTime  @default(now())
+  endTime   DateTime?
+  id        String    @id @default(cuid())
+  state     String?
+  updatedAt DateTime  @updatedAt
+}
+
+model Player {
+  createdAt    DateTime             @default(now())
+  currentScore Int?
+  id           String               @id @default(cuid())
+  name         String?
+  rewards      Reward[]
+  scores       Score[]
+  typeField    EnumPlayerTypeField?
+  updatedAt    DateTime             @updatedAt
+}
+
+model Bucket {
+  createdAt DateTime @default(now())
+  event     Event?   @relation(fields: [eventId], references: [id])
+  eventId   String?
+  id        String   @id @default(cuid())
+  rewards   Reward[]
+  scores    Score[]
+  updatedAt DateTime @updatedAt
+}
+
+model Reward {
+  bucket       Bucket?  @relation(fields: [bucketId], references: [id])
+  bucketId     String?
+  createdAt    DateTime @default(now())
+  id           String   @id @default(cuid())
+  player       Player?  @relation(fields: [playerId], references: [id])
+  playerId     String?
+  rewardAmount Int?
+  updatedAt    DateTime @updatedAt
+}
+
+model Score {
+  bucket        Bucket?  @relation(fields: [bucketId], references: [id])
+  bucketId      String?
+  createdAt     DateTime @default(now())
+  goldCollected Int?
+  id            String   @id @default(cuid())
+  player        Player?  @relation(fields: [playerId], references: [id])
+  playerId      String?
+  updatedAt     DateTime @updatedAt
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+enum EnumPlayerTypeField {
+  Option1
+}
